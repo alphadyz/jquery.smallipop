@@ -1,6 +1,6 @@
 ###!
-Smallipop (07/12/2013)
-Copyright (c) 2011-2013 Small Improvements (http://www.small-improvements.com)
+Smallipop (01/17/2015)
+Copyright (c) 2011-2015 Small Improvements (http://www.small-improvements.com)
 
 Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
 
@@ -86,7 +86,7 @@ Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) lice
   popupTemplate = "<div class='#{classInstance}'><div class='#{classContent}'/></div>"
 
   $.smallipop = sip =
-    version: '0.6.1'
+    version: '0.6.2'
     defaults:
       autoscrollPadding: 200
       contentAnimationSpeed: 150
@@ -494,7 +494,7 @@ Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) lice
 
   isElementFixed = (element) ->
     elemToCheck = element
-    while elemToCheck.length and elemToCheck[0].nodeName isnt 'HTML'
+    while elemToCheck.length and elemToCheck[0].nodeName.toUpperCase() isnt 'HTML'
       if elemToCheck.css('position') is 'fixed'
         return true
       elemToCheck = elemToCheck.parent()
@@ -731,6 +731,8 @@ Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) lice
     instances[id] = instance
 
   $.fn.smallipop = (options={}, hint='') ->
+    return @ if @length is 0
+
     # Handle direct method calls
     if typeof(options) is 'string'
       switch options.toLowerCase()

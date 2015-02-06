@@ -1,7 +1,7 @@
+
 /*!
 Test suite for jQuery Smallipop
-*/
-
+ */
 var defaultDelay, delayCall;
 
 $('.smallipop').smallipop({
@@ -19,10 +19,10 @@ delayCall = function(delay, callback) {
 
 defaultDelay = 1000;
 
+
 /*
 Test the core plugin features
-*/
-
+ */
 
 module('core');
 
@@ -34,10 +34,10 @@ test('Smallipop exists', function() {
   return equal(smallipop.attr('id'), 'smallipop1', 'First smallipop should have id 1');
 });
 
+
 /*
 Test interaction with the plugins ui elements
-*/
-
+ */
 
 module('interaction');
 
@@ -57,10 +57,10 @@ asyncTest('Show and hide tooltip by interaction', function() {
   });
 });
 
+
 /*
 Test direct calls to the plugins api
-*/
-
+ */
 
 module('api');
 
@@ -91,15 +91,15 @@ asyncTest('Change tooltip content with api', function() {
   trigger.smallipop('show');
   trigger.smallipop('update', newHint);
   return delayCall(defaultDelay, function() {
-    equal($('.sipContent', smallipop).text(), newHint, 'Hint should have changed');
+    equal($('.smallipop-content', smallipop).text(), newHint, 'Hint should have changed');
     return start();
   });
 });
 
+
 /*
 Test the plugins tour feature
-*/
-
+ */
 
 module('tour');
 
@@ -107,12 +107,12 @@ asyncTest('Run tour', function() {
   var smallipopTour;
   expect(2);
   smallipopTour = $('#smallipop2');
-  $('.smallipop-tour').smallipop('tour');
+  $('.smallipop-tour[data-smallipop-tour-index="1"]').smallipop('tour');
   return delayCall(defaultDelay, function() {
-    ok($('.smallipop-tour-progress', smallipopTour).text().indexOf('1 of 2') > 0, 'Tour should start at the first element');
+    equal($('.smallipop-tour-progress', smallipopTour).text(), '1 of 2', 'Tour should start at the selected element when no index is provided');
     $('.smallipop-tour').smallipop('tour', 2);
     return delayCall(defaultDelay, function() {
-      ok($('.smallipop-tour-progress', smallipopTour).text().indexOf('2 of 2') > 0, 'Tour with startindex 2 should start at the second element');
+      equal($('.smallipop-tour-progress', smallipopTour).text(), '2 of 2', 'Tour with startindex 2 should start at the second element');
       return start();
     });
   });
